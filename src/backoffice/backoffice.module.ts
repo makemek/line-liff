@@ -5,6 +5,6 @@ import { ProductModule } from './product'
 
 @Module({
   imports: [ProductModule],
-  controllers: [BackofficeController]
+  controllers: [BackofficeController],
 })
 export class BackofficeModule {}

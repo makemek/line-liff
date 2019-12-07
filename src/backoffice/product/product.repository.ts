@@ -5,7 +5,10 @@ import { IProduct } from './product.model'
 
 @Injectable()
 export class ProductRepository {
-  constructor(@InjectModel('Product') private readonly productModel: Model<IProduct>) {}
+  constructor(
+    @InjectModel('Product')
+    private readonly productModel: Model<IProduct>,
+  ) {}
 
   async findAll() {
     const products = await this.productModel.find().exec()

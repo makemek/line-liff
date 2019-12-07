@@ -7,7 +7,7 @@ export const ProductSchema = new Schema({
 })
 
 export interface IProduct extends Document {
-   name: string
-   image: string
-   price: Number
+  name: string
+  image: string
+  price: Number
 }

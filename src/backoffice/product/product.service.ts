@@ -7,8 +7,12 @@ import { IProduct } from './product.model'
 export class ProductService {
   constructor(private readonly repository: ProductRepository) {}
 
-  async addProduct({name, image, price}) {
-    const { _id } = await this.repository.insert({name, image, price} as IProduct)
+  async addProduct({ name, image, price }) {
+    const { _id } = await this.repository.insert({
+      name,
+      image,
+      price,
+    } as IProduct)
     return _id as string
   }
 

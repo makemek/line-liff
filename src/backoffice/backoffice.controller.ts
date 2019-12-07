@@ -11,7 +11,11 @@ export class BackofficeController {
     @Body('image') image: string,
     @Body('price') price: Number,
   ) {
-    const id = await this.productService.addProduct({ name, image, price })
+    const id = await this.productService.addProduct({
+      name,
+      image,
+      price,
+    })
     return { id }
   }
 
