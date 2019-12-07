@@ -9,24 +9,45 @@
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" type="text/css" href="/cms.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
   <body>
     <div id="app">
       <h1>Add Product</h1>
-      <div>
-        <label for="name">Name:</label>
-        <input required type="text" name="name" />
-      </div>
-      <div>
-        <label for="image">Image:</label>
-        <input required type="url" name="image" />
-      </div>
-      <div>
-        <label for="price">Price:</label>
-        <input required type="number" name="price" step="0.01" />
-      </div>
-      <button type="submit">Submit</button>
+      <form @submit.prevent="onAddProduct">
+        <div>
+          <label for="name">Name:</label>
+          <input
+            required
+            type="text"
+            name="name"
+            v-model="newProduct.name"
+          />
+        </div>
+        <div>
+          <label for="image">Image:</label>
+          <input
+            required
+            type="url"
+            name="image"
+            v-model="newProduct.image"
+          />
+        </div>
+        <div>
+          <label for="price">Price:</label>
+          <input
+            required
+            type="number"
+            name="price"
+            step="0.01"
+            v-model="newProduct.price"
+          />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+      <hr />
+      <h1>Product</h1>
     </div>
     <script src="/cms.js"></script>
   </body>
