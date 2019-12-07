@@ -1,4 +1,11 @@
-import { Controller, Put, Body, Get } from '@nestjs/common'
+import {
+  Controller,
+  Put,
+  Body,
+  Get,
+  Delete,
+  Param,
+} from '@nestjs/common'
 import { ProductService } from './product'
 
 @Controller('backoffice')
@@ -23,5 +30,11 @@ export class BackofficeController {
   async getProducts() {
     const products = await this.productService.getProducts()
     return { products }
+  }
+
+  @Delete('product/:id')
+  async deleteProduct(@Param('id') id: string) {
+    await this.productService.deleteProduct(id)
+    return { id }
   }
 }

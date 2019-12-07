@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import { IProduct } from './product.model'
@@ -18,5 +18,15 @@ export class ProductRepository {
   insert(model: IProduct) {
     const newProduct = new this.productModel(model)
     return newProduct.save()
+  }
+
+  async deleteProduct(prodId: string) {
+    const result = await this.productModel
+      .deleteOne({ _id: prodId })
+      .exec()
+    const found = result.n > 0
+    if (!found) {
+      throw new NotFoundException('Could not find product.')
+    }
   }
 }
