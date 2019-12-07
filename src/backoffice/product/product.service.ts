@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common'
 import { ProductRepository } from './product.repository'
-import { IProduct } from './product.model'
 
 @Injectable()
 export class ProductService {
@@ -11,7 +10,7 @@ export class ProductService {
       name,
       image,
       price,
-    } as IProduct)
+    })
     return _id as string
   }
 

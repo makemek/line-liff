@@ -12,10 +12,10 @@ export class ProductRepository {
 
   async findAll() {
     const products = await this.productModel.find().exec()
-    return products as IProduct[]
+    return products
   }
 
-  insert(model: IProduct) {
+  insert(model: object) {
     const newProduct = new this.productModel(model)
     return newProduct.save()
   }
