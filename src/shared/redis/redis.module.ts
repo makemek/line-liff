@@ -5,6 +5,6 @@ import { redisProvider } from './redis.provider'
 @Global()
 @Module({
   providers: [redisProvider],
-  exports: [redisProvider]
+  exports: [redisProvider],
 })
 export class RedisModule {}
