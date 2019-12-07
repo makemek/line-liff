@@ -1,13 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>CMS - Add/Remove Product</title>
     <meta charset="UTF-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>CMS - Add/Remove Product</title>
+    <link rel="stylesheet" type="text/css" href="/cms.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
-  <body></body>
+  <body>
+    <div id="app">
+      <a href="/">Home</a>
+      <h1>Add Product</h1>
+      <form @submit.prevent="onAddProduct">
+        <div>
+          <label for="name">Name:</label>
+          <input
+            required
+            type="text"
+            name="name"
+            v-model="newProduct.name"
+          />
+        </div>
+        <div>
+          <label for="image">Image URL:</label>
+          <input
+            required
+            type="url"
+            name="image"
+            v-model="newProduct.image"
+          />
+        </div>
+        <div>
+          <label for="price">Price:</label>
+          <input
+            required
+            type="number"
+            name="price"
+            step="0.01"
+            v-model="newProduct.price"
+          />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+      <hr />
+      <h1>Product</h1>
+      <div v-if="fetching">
+        <span>FETCHING PRODUCT...</span>
+      </div>
+      <div v-else>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Image URL</th>
+            <th>Preview</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+          <tr v-for="product in products">
+            <td>{{product.name}}</td>
+            <td>{{product.image}}</td>
+            <td>
+              <img :src="product.image" />
+            </td>
+            <td>{{product.price}}</td>
+            <td>
+              <button @click="onRemoveProduct(product._id)">
+                Remove
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <script src="/cms.js"></script>
+  </body>
 </html>
