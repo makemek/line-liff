@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common'
+import { MongooseModule } from '@nestjs/mongoose'
 import { sharedModules } from './shared'
 import { BackofficeModule } from './backoffice'
-import { MongooseModule } from '@nestjs/mongoose'
+import { AppController } from './app.controller'
 
 @Module({
   imports: [
@@ -12,5 +13,6 @@ import { MongooseModule } from '@nestjs/mongoose'
       useUnifiedTopology: true,
     }),
   ],
+  controllers: [AppController],
 })
 export class AppModule {}
