@@ -1,14 +1,22 @@
-import { Controller, Put, Inject } from '@nestjs/common'
-import Redis from 'ioredis'
-import { providerParam } from '../shared'
+import { Controller, Put, Body, Get } from '@nestjs/common'
+import { ProductService } from './product'
 
 @Controller('backoffice')
 export class BackofficeController {
-  constructor(@Inject(providerParam.REDIS) private readonly redis: Redis.Redis) {}
+  constructor(private readonly productService: ProductService) {}
 
   @Put('product')
-  getHello(): string {
-    console.log(this.redis)
-    return ''
+  async addProduct(
+    @Body('name') name: string,
+    @Body('image') image: string,
+    @Body('price') price: Number,
+  ) {
+    const id = await this.productService.addProduct({ name, image, price })
+    return { id }
+  }
+
+  @Get('product')
+  async getProducts() {
+    
   }
 }
