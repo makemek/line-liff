@@ -26,5 +26,9 @@ new Vue({
       this.products = data.products
       this.fetching = false
     },
+    async onRemoveProduct(id) {
+      await axios.delete(`/backoffice/product/${id}`)
+      await this.getProducts()
+    },
   },
 })

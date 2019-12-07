@@ -58,6 +58,7 @@
             <th>Image</th>
             <th>Preview</th>
             <th>Price</th>
+            <th>Action</th>
           </tr>
           <tr v-for="product in products">
             <td>{{product.name}}</td>
@@ -66,6 +67,11 @@
               <img :src="product.image" />
             </td>
             <td>{{product.price}}</td>
+            <td>
+              <button @click="onRemoveProduct(product._id)">
+                Remove
+              </button>
+            </td>
           </tr>
         </table>
       </div>
