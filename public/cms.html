@@ -9,5 +9,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>CMS - Add/Remove Product</title>
   </head>
-  <body></body>
+  <body>
+    <h1>Add Product</h1>
+    <form action="/backoffice/product" method="post">
+      <ul>
+        <li>
+          <label for="name">Name:</label>
+          <input required type="text" name="name" />
+        </li>
+        <li>
+          <label for="image">Image:</label>
+          <input required type="url" name="image" />
+        </li>
+        <li>
+          <label for="price">Price:</label>
+          <input required type="number" name="price" step="0.01" />
+        </li>
+      </ul>
+      <button type="submit">Submit</button>
+    </form>
+  </body>
 </html>
