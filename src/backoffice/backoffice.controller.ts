@@ -17,6 +17,7 @@ export class BackofficeController {
 
   @Get('product')
   async getProducts() {
-    
+    const products = await this.productService.getProducts()
+    return { products }
   }
 }

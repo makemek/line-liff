@@ -7,8 +7,9 @@ import { IProduct } from './product.model'
 export class ProductRepository {
   constructor(@InjectModel('Product') private readonly productModel: Model<IProduct>) {}
 
-  findAll() {
-
+  async findAll() {
+    const products = await this.productModel.find().exec()
+    return products as IProduct[]
   }
 
   insert(model: IProduct) {
