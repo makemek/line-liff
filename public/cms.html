@@ -48,6 +48,27 @@
       </form>
       <hr />
       <h1>Product</h1>
+      <div v-if="fetching">
+        <span>FETCHING PRODUCT...</span>
+      </div>
+      <div v-else>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Preview</th>
+            <th>Price</th>
+          </tr>
+          <tr v-for="product in products">
+            <td>{{product.name}}</td>
+            <td>{{product.image}}</td>
+            <td>
+              <img :src="product.image" />
+            </td>
+            <td>{{product.price}}</td>
+          </tr>
+        </table>
+      </div>
     </div>
     <script src="/cms.js"></script>
   </body>
