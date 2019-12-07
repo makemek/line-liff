@@ -18,7 +18,7 @@ new Vue({
     async onAddProduct() {
       const { name, image, price } = this.newProduct
       await axios.post('/backoffice/product', { name, image, price })
-      window.location.reload()
+      await this.getProducts()
     },
     async getProducts() {
       this.fetching = true
