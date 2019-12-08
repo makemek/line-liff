@@ -7,7 +7,45 @@
       content="width=device-width, initial-scale=1.0"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" type="text/css" href="/serve.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <title>Serve Orders</title>
   </head>
-  <body></body>
+  <body>
+    <div id="app">
+      <a href="/">Home</a>
+      <h1>Serve Order</h1>
+      <div v-if="fetching">
+        <span>FETCHING ORDER...</span>
+      </div>
+      <div v-else>
+        <table>
+          <tr>
+            <th>Customer ID</th>
+            <th>Product Name</th>
+            <th>Image URL</th>
+            <th>Preview</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+          <tr v-for="order in orders">
+            <td>{{order.customerId}}</td>
+            <td>{{order.product.name}}</td>
+            <td>{{order.product.image}}</td>
+            <td>
+              <img :src="order.product.image" />
+            </td>
+            <td>{{order.product.price}}</td>
+            <td>
+              <button @click="onServeOrder(order._id)">
+                Serve
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <script src="/serve.js"></script>
+  </body>
 </html>

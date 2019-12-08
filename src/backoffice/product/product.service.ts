@@ -22,4 +22,8 @@ export class ProductService {
   async deleteProduct(id: string) {
     return await this.repository.deleteProduct(id)
   }
+
+  async findProductById(id: string) {
+    return await this.repository.findProductById(id)
+  }
 }

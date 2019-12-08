@@ -6,11 +6,16 @@ import {
   Delete,
   Param,
 } from '@nestjs/common'
+
 import { ProductService } from './product'
+import { OrderService } from './order'
 
 @Controller('backoffice')
 export class BackofficeController {
-  constructor(private readonly productService: ProductService) {}
+  constructor(
+    private readonly productService: ProductService,
+    private readonly orderService: OrderService,
+  ) {}
 
   @Post('product')
   async addProduct(
@@ -35,6 +40,18 @@ export class BackofficeController {
   @Delete('product/:id')
   async deleteProduct(@Param('id') id: string) {
     await this.productService.deleteProduct(id)
+    return { id }
+  }
+
+  @Get('order')
+  async getOrders() {
+    const orders = await this.orderService.getOrders()
+    return { orders }
+  }
+
+  @Delete('order/:id')
+  async deleteOrder(@Param('id') id: string) {
+    await this.orderService.deleteOrder(id)
     return { id }
   }
 }

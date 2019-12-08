@@ -1,5 +1,7 @@
 import { Schema, Document } from 'mongoose'
 
+export const modelName = 'Product'
+
 export const ProductSchema = new Schema({
   name: { type: String, required: true },
   image: { type: String, required: true },
