@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { OrderRepository } from './order.repository'
+import { STATUS } from './order.model'
 
 @Injectable()
 export class OrderService {
@@ -9,6 +10,7 @@ export class OrderService {
     const { _id } = await this.repository.insert({
       customerId,
       product,
+      status: STATUS.PENDING,
     })
     return _id as string
   }
@@ -20,5 +22,13 @@ export class OrderService {
 
   async deleteOrder(id: string) {
     return await this.repository.deleteOrder(id)
+  }
+
+  async serveOrder(id: string) {
+    const { _id } = await this.repository.updateStatus(
+      id,
+      STATUS.SERVED,
+    )
+    return _id as string
   }
 }

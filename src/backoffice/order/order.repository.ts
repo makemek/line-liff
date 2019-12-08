@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import { IOrder } from './order.model'
+import { IOrder, STATUS } from './order.model'
 import { modelName } from './order.model'
 
 @Injectable()
@@ -29,5 +29,11 @@ export class OrderRepository {
     if (!found) {
       throw new NotFoundException('Could not find order.')
     }
+  }
+
+  async updateStatus(orderId: string, status: STATUS) {
+    return await this.orderModel.findByIdAndUpdate(orderId, {
+      status,
+    })
   }
 }

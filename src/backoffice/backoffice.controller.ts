@@ -54,4 +54,10 @@ export class BackofficeController {
     await this.orderService.deleteOrder(id)
     return { id }
   }
+
+  @Post('order/serve')
+  async serveOrder(@Body('orderId') orderId: string) {
+    const id = await this.orderService.serveOrder(orderId)
+    return { id }
+  }
 }
