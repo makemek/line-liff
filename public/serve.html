@@ -27,6 +27,7 @@
             <th>Image URL</th>
             <th>Preview</th>
             <th>Price</th>
+            <th>Status</th>
             <th>Action</th>
           </tr>
           <tr v-for="order in orders">
@@ -37,6 +38,7 @@
               <img :src="order.product.image" />
             </td>
             <td>{{order.product.price}}</td>
+            <td>{{order.status}}</td>
             <td>
               <button @click="onServeOrder(order._id)">
                 Serve
