@@ -40,6 +40,9 @@
 .product-image {
   width: 100%;
 }
+.product-image:hover {
+  cursor: pointer;
+}
 .label-select {
   font-size: 21px;
   color: green;

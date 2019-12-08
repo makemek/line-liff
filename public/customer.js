@@ -16,5 +16,8 @@ new Vue({
       this.products = data.products
       this.productLoading = false
     },
+    async onPlaceOrder(productId) {
+      await axios.post('/orders', { productId })
+    },
   },
 })

@@ -28,7 +28,11 @@
           v-for="product in products"
           class="product-image-wrapper"
         >
-          <img :src="product.image" class="product-image" />
+          <img
+            :src="product.image"
+            @click="onPlaceOrder(product._id)"
+            class="product-image"
+          />
           <div class="text-overlay">
             <div class="product-name">{{product.name}}</div>
             <div class="label-select">Select &gt;</div>
