@@ -19,7 +19,21 @@
       <div class="section-title section-coffee">
         <span>Coffee</span>
       </div>
-      <div class="grid"></div>
+      <div v-if="productLoading">
+        LOADING...
+      </div>
+      <div v-else class="grid">
+        <div
+          v-for="product in products"
+          class="product-image-wrapper"
+        >
+          <img :src="product.image" class="product-image" />
+          <div class="text-overlay">
+            <div class="product-name">{{product.name}}</div>
+            <div class="label-select">Select &gt;</div>
+          </div>
+        </div>
+      </div>
     </div>
     <script src="/customer.js"></script>
   </body>
