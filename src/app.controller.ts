@@ -1,12 +1,16 @@
-import { Controller, Post, Body, Get } from '@nestjs/common'
+import { Controller, Post, Body, Get, Inject } from '@nestjs/common'
+import { Redis } from 'ioredis'
 
-import { ProductService, OrderService } from './backoffice'
+import { ProductService, OrderService, channels } from './backoffice'
+import { providerParam } from './shared'
 
 @Controller()
 export class AppController {
   constructor(
     private readonly orderService: OrderService,
     private readonly productService: ProductService,
+    @Inject(providerParam.REDIS.publisher)
+    private readonly redisPub: Redis,
   ) {}
 
   @Get('product')
@@ -29,6 +33,9 @@ export class AppController {
       },
       customerId: '1',
     })
+
+    this.redisPub.publish(channels.ORDERS, id)
+
     return { id }
   }
 }

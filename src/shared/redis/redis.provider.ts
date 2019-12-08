@@ -1,8 +1,16 @@
 import Redis from 'ioredis'
 
-export const providerName = 'REDIS_CLIENT'
-export const redisProvider = {
-  provide: providerName,
+export const providerName = {
+  publisher: 'REDIS_PUB',
+  subscriber: 'REDIS_SUB',
+}
+export const redisSubscriberProvider = {
+  provide: providerName.publisher,
+  useFactory,
+}
+
+export const redisPublisherProvider = {
+  provide: providerName.subscriber,
   useFactory,
 }
 

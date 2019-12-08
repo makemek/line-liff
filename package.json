@@ -24,7 +24,8 @@
     "mongoose": "5.7.14",
     "reflect-metadata": "0.1.13",
     "rimraf": "3.0.0",
-    "rxjs": "6.5.3"
+    "rxjs": "6.5.3",
+    "uuid": "3.3.3"
   },
   "devDependencies": {
     "@nestjs/cli": "6.9.0",
@@ -36,6 +37,7 @@
     "@types/mongoose": "5.5.32",
     "@types/node": "12.7.5",
     "@types/supertest": "2.0.8",
+    "@types/uuid": "3.4.6",
     "husky": "3.1.0",
     "jest": "24.9.0",
     "lint-staged": "9.5.0",
@@ -51,7 +53,7 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
-      "npm run lint -- --fix",
+      "npm run lint",
       "git add"
     ]
   },
