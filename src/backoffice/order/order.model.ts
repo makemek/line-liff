@@ -18,10 +18,12 @@ export const OrderSchema = new Schema({
     enum: [STATUS.PENDING, STATUS.SERVED],
     required: true,
   },
+  dateCreated: { type: Number, required: true },
 })
 
 export interface IOrder extends Document {
   customerId: string
   product: object
   status: STATUS
+  number: number
 }

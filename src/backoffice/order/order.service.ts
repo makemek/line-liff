@@ -11,12 +11,15 @@ export class OrderService {
       customerId,
       product,
       status: STATUS.PENDING,
+      dateCreated: Date.now(),
     })
     return _id as string
   }
 
   async getOrders() {
-    const orders = await this.repository.findAll()
+    const orders = await this.repository.findAll({
+      dateCreated: 'desc',
+    })
     return orders
   }
 

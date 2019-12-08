@@ -11,8 +11,11 @@ export class OrderRepository {
     private readonly orderModel: Model<IOrder>,
   ) {}
 
-  async findAll() {
-    const orders = await this.orderModel.find().exec()
+  async findAll(sortOptions?: object) {
+    const orders = await this.orderModel
+      .find()
+      .sort(sortOptions)
+      .exec()
     return orders
   }
 
