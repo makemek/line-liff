@@ -1,0 +1,30 @@
+#app {
+  width: 50%;
+}
+.welcome {
+  color: #c6c6c6;
+  text-align: center;
+  font-weight: bold;
+  display: block;
+}
+.line-cafe {
+  text-align: center;
+  color: #6a4335;
+  margin-bottom: 50px;
+  margin-top: 0px;
+}
+.section-title {
+  font-size: 32px;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #c0c0c0;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+.section-title span {
+  background: #fff;
+  padding: 20px;
+}
+.section-coffee {
+  color: #c6c6c6;
+}
