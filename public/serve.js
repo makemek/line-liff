@@ -11,7 +11,8 @@ new Vue({
   },
   methods: {
     async onServeOrder(orderId) {
-      console.log('serve', orderId)
+      await axios.post('/backoffice/order/serve', { orderId })
+      this.getOrders()
     },
     async getOrders() {
       this.fetching = true
