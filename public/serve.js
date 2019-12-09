@@ -7,8 +7,9 @@ new Vue({
     }
   },
   created() {
+    const eventSource = new EventSource('/backoffice/event')
     this.getOrders()
-    this.listenIncommingOrder()
+    this.listenIncommingOrder(eventSource)
   },
   methods: {
     async onServeOrder(orderId) {
@@ -23,9 +24,8 @@ new Vue({
       this.orders = data.orders
       this.fetching = false
     },
-    listenIncommingOrder() {
-      const source = new EventSource('/backoffice/order/event')
-      source.addEventListener('order', async () => {
+    listenIncommingOrder(eventSource) {
+      eventSource.addEventListener('order-created', async () => {
         await this.getOrders()
       })
     },

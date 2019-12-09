@@ -45,7 +45,14 @@ export class AppController {
       customerId: '1',
     })
 
-    this.redisPub.publish(channels.ORDERS, id)
+    const eventObject = {
+      event: 'order-created',
+      payload: { orderId: id },
+    }
+    this.redisPub.publish(
+      channels.ORDERS,
+      JSON.stringify(eventObject),
+    )
 
     return { id }
   }

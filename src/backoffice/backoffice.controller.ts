@@ -92,7 +92,7 @@ export class BackofficeController {
     return { id }
   }
 
-  @Get('order/event')
+  @Get('/event')
   async listenOrderEvent(@Res() res: Response) {
     res.set({
       Connection: 'keep-alive',
@@ -104,9 +104,10 @@ export class BackofficeController {
       if (channel !== channels.ORDERS) {
         return
       }
+      const { event, payload } = JSON.parse(message)
       res.write(`id: ${uuid()}\n`)
-      res.write('event: order\n')
-      res.write(`data: ${message}\n\n`)
+      res.write(`event: ${event}\n`)
+      res.write(`data: ${JSON.stringify(payload)}\n\n`)
     })
 
     const retryMilliseconds = 3000
