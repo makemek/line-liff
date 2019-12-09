@@ -7,7 +7,39 @@
       content="width=device-width, initial-scale=1.0"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" type="text/css" href="/customer.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <title>Customer</title>
   </head>
-  <body></body>
+  <body>
+    <div id="app">
+      <a href="/">Home</a>
+      <span class="welcome">Welcome to</span>
+      <h1 class="line-cafe">LINE cafe</h1>
+      <div class="section-title section-coffee">
+        <span>Coffee</span>
+      </div>
+      <div v-if="productLoading">
+        LOADING...
+      </div>
+      <div v-else class="grid">
+        <div
+          v-for="product in products"
+          class="product-image-wrapper"
+        >
+          <img
+            :src="product.image"
+            @click="onPlaceOrder(product._id)"
+            class="product-image"
+          />
+          <div class="text-overlay">
+            <div class="product-name">{{product.name}}</div>
+            <div class="label-select">Select &gt;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/customer.js"></script>
+  </body>
 </html>

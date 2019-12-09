@@ -19,7 +19,7 @@ export class AppController {
     return { products }
   }
 
-  @Post('place-order')
+  @Post('orders')
   async placeOrder(@Body('productId') productId: string) {
     const product = await this.productService.findProductById(
       productId,
