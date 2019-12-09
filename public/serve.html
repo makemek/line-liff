@@ -40,7 +40,10 @@
             <td>{{order.product.price}}</td>
             <td>{{order.status}}</td>
             <td>
-              <button @click="onServeOrder(order._id)">
+              <button
+                :disabled="order.status === 'SERVED'"
+                @click="onServeOrder(order._id)"
+              >
                 Serve
               </button>
             </td>
