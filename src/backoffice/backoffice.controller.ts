@@ -25,6 +25,8 @@ export class BackofficeController {
     private readonly orderService: OrderService,
     @Inject(providerParam.REDIS.subscriber)
     private readonly redisSub: Redis,
+    @Inject(providerParam.REDIS.publisher)
+    private readonly redisPub: Redis,
   ) {}
 
   @Post('product')
@@ -38,6 +40,15 @@ export class BackofficeController {
       image,
       price,
     })
+    const eventObject = {
+      event: 'product-add',
+      payload: { productId: id },
+    }
+    this.redisPub.publish(
+      channels.PRODUCTS,
+      JSON.stringify(eventObject),
+    )
+
     return { id }
   }
 
@@ -50,6 +61,16 @@ export class BackofficeController {
   @Delete('product/:id')
   async deleteProduct(@Param('id') id: string) {
     await this.productService.deleteProduct(id)
+
+    const eventObject = {
+      event: 'product-delete',
+      payload: { productId: id },
+    }
+    this.redisPub.publish(
+      channels.PRODUCTS,
+      JSON.stringify(eventObject),
+    )
+
     return { id }
   }
 

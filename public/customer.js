@@ -7,7 +7,9 @@ new Vue({
     }
   },
   created() {
+    const eventSource = new EventSource('/event')
     this.getProducts()
+    this.listenIncommingProduct(eventSource)
   },
   methods: {
     async getProducts() {
@@ -18,6 +20,14 @@ new Vue({
     },
     async onPlaceOrder(productId) {
       await axios.post('/orders', { productId })
+    },
+    async listenIncommingProduct(eventSource) {
+      eventSource.addEventListener('product-add', async () => {
+        await this.getProducts()
+      })
+      eventSource.addEventListener('product-delete', async () => {
+        await this.getProducts()
+      })
     },
   },
 })

@@ -1,5 +1,14 @@
-import { Controller, Post, Body, Get, Inject } from '@nestjs/common'
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Inject,
+  Res,
+} from '@nestjs/common'
 import { Redis } from 'ioredis'
+import { Response } from 'express'
+import uuid from 'uuid/v4'
 
 import { ProductService, OrderService, channels } from './backoffice'
 import { providerParam } from './shared'
@@ -11,6 +20,8 @@ export class AppController {
     private readonly productService: ProductService,
     @Inject(providerParam.REDIS.publisher)
     private readonly redisPub: Redis,
+    @Inject(providerParam.REDIS.subscriber)
+    private readonly redisSub: Redis,
   ) {}
 
   @Get('product')
@@ -37,5 +48,27 @@ export class AppController {
     this.redisPub.publish(channels.ORDERS, id)
 
     return { id }
+  }
+
+  @Get('/event')
+  async listenOrderEvent(@Res() res: Response) {
+    res.set({
+      Connection: 'keep-alive',
+      ['Content-Type']: 'text/event-stream',
+      ['Cache-Control']: 'no-cache',
+    })
+    await this.redisSub.subscribe(channels.PRODUCTS)
+    this.redisSub.on('message', (channel, message) => {
+      if (channel !== channels.PRODUCTS) {
+        return
+      }
+      const { event, payload } = JSON.parse(message)
+      res.write(`id: ${uuid()}\n`)
+      res.write(`event: ${event}\n`)
+      res.write(`data: ${JSON.stringify(payload)}\n\n`)
+    })
+
+    const retryMilliseconds = 3000
+    res.write(`retry: ${retryMilliseconds}\n\n`)
   }
 }
