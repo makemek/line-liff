@@ -29,7 +29,7 @@ export class BackofficeController {
     private readonly redisPub: Redis,
   ) {}
 
-  @Post('product')
+  @Post('products')
   async addProduct(
     @Body('name') name: string,
     @Body('image') image: string,
@@ -52,13 +52,13 @@ export class BackofficeController {
     return { id }
   }
 
-  @Get('product')
+  @Get('products')
   async getProducts() {
     const products = await this.productService.getProducts()
     return { products }
   }
 
-  @Delete('product/:id')
+  @Delete('products/:id')
   async deleteProduct(@Param('id') id: string) {
     await this.productService.deleteProduct(id)
 
@@ -74,25 +74,25 @@ export class BackofficeController {
     return { id }
   }
 
-  @Get('order')
+  @Get('orders')
   async getOrders() {
     const orders = await this.orderService.getOrders()
     return { orders }
   }
 
-  @Delete('order/:id')
+  @Delete('orders/:id')
   async deleteOrder(@Param('id') id: string) {
     await this.orderService.deleteOrder(id)
     return { id }
   }
 
-  @Put('order/:id/serve')
+  @Put('orders/:id/serve')
   async serveOrder(@Param('id') orderId: string) {
     const id = await this.orderService.serveOrder(orderId)
     return { id }
   }
 
-  @Get('/event')
+  @Get('/events')
   async listenOrderEvent(@Res() res: Response) {
     res.set({
       Connection: 'keep-alive',

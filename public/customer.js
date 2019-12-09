@@ -7,14 +7,14 @@ new Vue({
     }
   },
   created() {
-    const eventSource = new EventSource('/event')
+    const eventSource = new EventSource('/events')
     this.getProducts()
     this.listenIncommingProduct(eventSource)
   },
   methods: {
     async getProducts() {
       this.productLoading = true
-      const { data } = await axios.get('/product')
+      const { data } = await axios.get('/products')
       this.products = data.products
       this.productLoading = false
     },

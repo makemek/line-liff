@@ -24,7 +24,7 @@ export class AppController {
     private readonly redisSub: Redis,
   ) {}
 
-  @Get('product')
+  @Get('products')
   async getProducts() {
     const products = await this.productService.getProducts()
     return { products }
@@ -57,7 +57,7 @@ export class AppController {
     return { id }
   }
 
-  @Get('/event')
+  @Get('/events')
   async listenOrderEvent(@Res() res: Response) {
     res.set({
       Connection: 'keep-alive',
