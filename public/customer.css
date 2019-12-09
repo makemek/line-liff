@@ -59,3 +59,10 @@
   font-weight: bolder;
   font-size: 18px;
 }
+.global-message {
+  position: fixed;
+  top: 0%;
+  right: 0%;
+  padding: 20px;
+  background: #c6c6c6;
+}

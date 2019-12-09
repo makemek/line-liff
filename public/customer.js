@@ -4,12 +4,14 @@ new Vue({
     return {
       productLoading: false,
       products: [],
+      globalMessage: undefined,
     }
   },
   created() {
     const eventSource = new EventSource('/events')
     this.getProducts()
     this.listenIncommingProduct(eventSource)
+    this.listenIncommingOrder(eventSource)
   },
   methods: {
     async getProducts() {
@@ -27,6 +29,17 @@ new Vue({
       })
       eventSource.addEventListener('product-delete', async () => {
         await this.getProducts()
+      })
+    },
+    listenIncommingOrder(eventSource) {
+      let timeoutId
+      eventSource.addEventListener('order-served', (event) => {
+        const data = JSON.parse(event.data)
+        clearTimeout(timeoutId)
+        this.globalMessage = `order ${data.orderId} has been served.`
+        timeoutId = setTimeout(() => {
+          this.globalMessage = undefined
+        }, 3000)
       })
     },
   },

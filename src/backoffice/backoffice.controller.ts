@@ -89,6 +89,16 @@ export class BackofficeController {
   @Put('orders/:id/serve')
   async serveOrder(@Param('id') orderId: string) {
     const id = await this.orderService.serveOrder(orderId)
+
+    const eventObject = {
+      event: 'order-served',
+      payload: { orderId: id },
+    }
+    this.redisPub.publish(
+      channels.PRODUCTS,
+      JSON.stringify(eventObject),
+    )
+
     return { id }
   }
 
