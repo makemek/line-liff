@@ -64,9 +64,10 @@ export class AppController {
       ['Content-Type']: 'text/event-stream',
       ['Cache-Control']: 'no-cache',
     })
-    await this.redisSub.subscribe(channels.PRODUCTS)
+    const listenChannels = [channels.PRODUCTS, channels.ORDERS]
+    await this.redisSub.subscribe(...listenChannels)
     this.redisSub.on('message', (channel, message) => {
-      if (channel !== channels.PRODUCTS) {
+      if (!listenChannels.includes(channel)) {
         return
       }
       const { event, payload } = JSON.parse(message)
