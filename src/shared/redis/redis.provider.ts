@@ -15,6 +15,6 @@ export const redisPublisherProvider = {
 }
 
 function useFactory() {
-  const redis = new Redis()
+  const redis = new Redis(process.env.REDIS_URI)
   return redis
 }

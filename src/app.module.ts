@@ -8,10 +8,13 @@ import { AppController } from './app.controller'
   imports: [
     ...sharedModules,
     BackofficeModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/line-liff', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }),
+    MongooseModule.forRoot(
+      process.env.MONGO_URI || 'mongodb://localhost:27017/line-liff',
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
+    ),
   ],
   controllers: [AppController],
 })

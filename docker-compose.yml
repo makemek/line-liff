@@ -1,0 +1,25 @@
+version: '3'
+services:
+  web:
+    container_name: liff_web
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - MONGO_URI=mongodb://liff_db/line-liff
+      - REDIS_URI=redis://liff_redis
+    links:
+      - db
+      - redis
+  db:
+    image: mongo:4.2.1
+    container_name: liff_db
+    expose:
+      - 27017
+  redis:
+    image: redis:5.0.7
+    container_name: liff_redis
+    expose:
+      - 6379
