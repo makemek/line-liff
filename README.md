@@ -74,7 +74,7 @@ They are rarely updated anyway so it shouldn't be a problem in long term.
 
 ## How might you improve this system?
 
-### Fronted needs more styling
+### Frontend needs more styling
 
 I just want to have a simple interface to interact with the backend.
 I applied little styling to them.
