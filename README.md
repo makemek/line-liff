@@ -21,7 +21,7 @@ So that I can push notification to the customer without having to do authenticat
 
 # Answer
 
-I pick Nodejs because the project doesn't require doing any performance intensive operations on the backend.
+I pick javascript (Nodejs) because the project doesn't require doing any performance intensive operations on the backend.
 Tasks are about handling HTTP requests, responding to events, and communicating with external services.
 Nodejs is excellent at dealing with asynchronous tasks.
 
@@ -32,7 +32,7 @@ Unlike .NET, Nodejs doesn't have type-checking feature.
 Typescript, an extension language to javascript, offers a type-checking and can run inside Nodejs by transpiling the code to javascript.
 
 Both of these languages are suitable for the project.
-Though, .NET is a little more cumbersome to deploy than Nodejs because it has to run on a Windows server (IIS).
+Though, .NET is a little more cumbersome to deploy than Nodejs because supports on linux container are limited.
 
 Nodejs is what I am comfortable with.
 Therefore, it is the language that I choose to implement in this project.
