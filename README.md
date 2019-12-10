@@ -109,6 +109,19 @@ So it is unidirectional, not bidirectional in websocket.
 Using websocket is overkill in my opinion as client doesn't have to talk on the same channel.
 Client doesn't talk back to server frequently, so HTTP overhead is not a problem to the point that I have to use websocket over SSE.
 
+### Customer may not be there to receive a notification
+
+If customer explicitly close a connection to the server such as closing a tab on their browser, order message event published by Redis is lost forever.
+If notifications have to be preserved, we can use [AWS SQS](https://aws.amazon.com/th/sqs/) or [RabbitMQ](https://www.rabbitmq.com/) to queue messages and consume when needed.
+
+### Usage of mongo object `_id` as an identifier
+
+Mongo's generated ids are not human readable.
+It is difficult to communicate among teams or stakeholders.
+It is more preferable to use custom id based on business requirements.
+For example, `Product` can use [SKU](https://www.thebalancesmb.com/what-is-a-sku-in-retail-terms-2890158) as an identifier.
+`Order` can use custom id like LIF-000001.
+
 ## Are there any additional features that could be added to this system?
 
 - Customer can choose multiple products before making an order
